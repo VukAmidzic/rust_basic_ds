@@ -1,3 +1,5 @@
+use std::io;
+
 #[derive(Debug)]
 struct Node {
     value: i32,
@@ -34,14 +36,32 @@ impl Node {
             }
         }
     }
+    
+    fn get_stdin() -> Node{
+        let mut numbers = String::new();
+
+        io::stdin()
+        .read_line(&mut numbers)
+        .ok()
+        .expect("read error");
+
+        let numbers_arr: Vec<i32> = numbers
+        .split_whitespace()
+        .map(|s| s.parse().expect("parse error"))
+        .collect();
+        
+        let mut head: Node = Node::new(numbers_arr[0]);
+        
+        for i in 1..numbers_arr.len() {
+            head.add_to_list(numbers_arr[i]);
+        }
+        
+        head
+    }
 }
 
 fn main() {
-    let mut head: Node = Node::new(1);
+    let mut list_head = Node::get_stdin();
     
-    for i in 2..6 {
-        Node::add_to_list(&mut head, i);
-    }
-    
-    Node::list_output(&mut head);
+    println!("{:#?}", list_head);
 }
