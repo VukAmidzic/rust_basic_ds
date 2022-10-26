@@ -62,13 +62,13 @@ impl Node {
         root
     }
     
-    /*fn get_height(&mut self) -> i32 {
-        
-    }*/
+    fn get_height(&mut self) {
+        todo!()
+    }
 }
 
 fn main() {
     let mut root = Node::make_list();
     
-    println!("{}", Node::get_height(&mut root));
+    println!("{:?}", root);
 }
